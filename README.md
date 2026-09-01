@@ -179,5 +179,3 @@ This project is licensed under the [MIT License](LICENSE).
 
 - [Cordis](https://github.com/cordiverse/cordis) — the plugin microkernel framework.
 - [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) — the architectural blueprint this demo mirrors.
-
----
