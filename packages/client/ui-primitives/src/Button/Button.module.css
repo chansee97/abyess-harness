@@ -1,0 +1,92 @@
+/* Button geometry: sized by content + padding (no fixed heights), md 7/14
+ * → ~36px tall, sm compact. A button with an icon but no label shapes itself
+ * into a 1:1 disc via .iconOnly (mirroring harness's icon-only buttons).
+ * Colors ride --ab-* aliases; no hardcoded values. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  /* Border seat is universal (transparent by default) so every variant shares
+   * one box model — outline doesn't grow 2px over ghost/primary, and flipping
+   * variants never reflows layout. */
+  border: 1px solid transparent;
+  border-radius: var(--ab-radius-md);
+  cursor: pointer;
+  font-size: var(--ab-text-md);
+  line-height: 22px;
+  color: var(--ab-text-primary);
+  background: transparent;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.md {
+  /* Fixed seat (harness's approach): every variant measures exactly this
+     tall — the shared border seat eats into the box rather than growing it,
+     so outline can never stand 2px proud of ghost/primary. */
+  height: 38px;
+  padding: var(--ab-space-2) var(--ab-space-4);
+}
+
+/* Compact density for dense rows (icon discs and tight chips): 30px tall. */
+.sm {
+  height: 30px;
+  padding: 6px var(--ab-space-3);
+  font-size: var(--ab-text-sm);
+  line-height: 18px;
+}
+
+.primary {
+  background: var(--ab-accent);
+  color: var(--ab-on-accent);
+}
+
+.primary:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--ab-bg-hover);
+}
+
+/* Dialog Cancel / quiet confirmations: lights up the shared border seat on
+ * a transparent fill. */
+.outline {
+  border-color: var(--ab-border);
+  background: transparent;
+}
+
+.outline:hover:not(:disabled) {
+  background: var(--ab-bg-hover);
+}
+
+/* Icon-only form: equal sides with real air around the 16px glyph
+ * (.md → 34px disc, .sm → 28px disc — harness's compact-action size);
+ * text buttons stay soft-cornered rectangles. height:auto lets the
+ * aspect-ratio own both sides — the size classes' fixed heights apply to
+ * the rectangular form only. */
+.iconOnly {
+  aspect-ratio: 1;
+  height: auto;
+  border-radius: 999px;
+}
+
+.md.iconOnly {
+  padding: 9px;
+}
+
+.sm.iconOnly {
+  padding: 6px;
+}
+
+.icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@abyss-harness/llm",
+  "description": "LLM adapter registry with a waterfall-interceptable streaming call API",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^"
+  }
+}

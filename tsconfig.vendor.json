@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  // Vendor sources compile under relaxed flags (mirroring harness's
+  // per-package vendored tsconfigs): upstream cordis is not written against
+  // the demo's full strictness, and we audit rather than rewrite it.
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "strictFunctionTypes": false,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  },
+  "include": [
+    "vendor/*/src/**/*.ts"
+  ]
+}

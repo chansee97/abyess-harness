@@ -1,0 +1,15 @@
+{
+  "name": "@abyss-harness/base",
+  "description": "The shared core of the abyss-harness application as a bundle: the substance is cordis.patch.yml, applied as one insert over the empty profile root",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "files": [
+    "cordis.patch.yml"
+  ]
+}

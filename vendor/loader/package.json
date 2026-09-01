@@ -1,0 +1,11 @@
+{
+  "name": "@abyss-harness/cordis-plugin-loader",
+  "description": "Vendored @cordisjs/plugin-loader 1.0.0-rc.5 source",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cosmokit": "workspace:^"
+  }
+}

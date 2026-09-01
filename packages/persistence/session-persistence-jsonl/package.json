@@ -1,0 +1,11 @@
+{
+  "name": "@abyss-harness/session-persistence-jsonl",
+  "description": "JSONL session persistence with boot-time replay",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^"
+  }
+}

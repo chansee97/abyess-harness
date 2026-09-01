@@ -1,0 +1,29 @@
+.conversation {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Empty (new chat) state: the chat area stops flexing to fill, so the
+   welcome + composer group centers vertically; with messages the chat
+   area's flex:1 pushes the composer back to the bottom. */
+.empty {
+  justify-content: center;
+}
+
+/* Composer takeover (dsh's composer chain): while an approval/question
+   awaits, the interaction cards sit exactly where the composer card does —
+   same horizontal padding, same 720px card width — and the composer
+   returns once every pending request is settled. */
+.interactions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 var(--ab-space-4) var(--ab-space-1);
+  gap: var(--ab-space-2);
+}
+
+.interactions > * {
+  width: 100%;
+  max-width: 720px;
+}

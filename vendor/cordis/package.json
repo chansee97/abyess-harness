@@ -1,0 +1,16 @@
+{
+  "name": "@abyss-harness/cordis",
+  "description": "Meta-Framework for Modern JavaScript Applications — vendored cordis 4.0.0-rc.8 source",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cosmokit": "workspace:^",
+    "@standard-schema/spec": "^1.1.0"
+  },
+  "peerDependencies": {
+    "@abyss-harness/cordis-plugin-include": "workspace:^",
+    "@abyss-harness/cordis-plugin-loader": "workspace:^"
+  }
+}

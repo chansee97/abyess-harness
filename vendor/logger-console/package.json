@@ -1,0 +1,16 @@
+{
+  "name": "@abyss-harness/cordis-plugin-logger-console",
+  "description": "Console logger exporter — vendored @cordisjs/plugin-logger-console 1.0.0 source",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cosmokit": "workspace:^",
+    "@abyss-harness/schemastery": "workspace:^",
+    "supports-color": "^9.4.0"
+  },
+  "peerDependencies": {
+    "@abyss-harness/cordis": "workspace:^"
+  }
+}

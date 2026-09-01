@@ -1,0 +1,15 @@
+{
+  "name": "@abyss-harness/tool-ask-user",
+  "description": "ask_user_question tool plugin (model asks the human questions: options, multi-select, or free text)",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^",
+    "@abyss-harness/approval": "workspace:^"
+  },
+  "peerDependencies": {
+    "@abyss-harness/tools": "workspace:^"
+  }
+}

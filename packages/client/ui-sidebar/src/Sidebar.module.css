@@ -1,0 +1,81 @@
+.sidebar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: var(--ab-space-2);
+  gap: var(--ab-space-2);
+  overflow: hidden;
+}
+
+/* Collapsed rail: the rail's own padding tightens so the sm icon-only
+   discs (30px: 16 glyph + 2×6 padding + 2 border seat) fit the 56px track —
+   button styles never change with the collapse state, only this container
+   does. */
+
+/* The two column-flex parents (.middle and .sidebar) stretch their children
+   to the 40px track width, and .iconOnly's aspect-ratio turns that width
+   into height → 40px discs next to the 30px header toggle. Align-self
+   releases their cross size back to fit-content, and centers them: all
+   three rail icons render one uniform 30px sm disc. */
+.collapsed .disc {
+  align-self: center;
+}
+
+.collapsed {
+  padding: var(--ab-space-2);
+}
+
+/* Header row: brand title left, collapse toggle far right. */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ab-space-2);
+}
+
+.collapsed .header {
+  justify-content: center;
+}
+
+.brandName {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ab-space-2);
+  font-weight: var(--ab-weight-semibold);
+  font-size: var(--ab-text-lg);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* The rail keeps only the toggle: brand (icon + name) hides entirely. */
+.collapsed .brandName {
+  display: none;
+}
+
+/* Brand mark: the favicon's two-tone abyss face; carries its own fills, so no
+   color here — just pin its box so it never shrinks next to the title. */
+.brandIcon {
+  flex: none;
+}
+
+/* Middle region grows to fill; its children (nav capsules + history) stretch
+   to the rail width by default; settings stay pinned to the bottom. */
+.middle {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ab-space-2);
+}
+
+/* Collapse icon points left when open; rotate it to point right on the rail. */
+.toggleCollapsed {
+  transform: rotate(180deg);
+}
+
+/* Settings: the rail's bottom row — stretched full-width with its label
+ * aligned left, unlike the centered pills above. The atom owns everything
+ * else. */
+.settings {
+  justify-content: flex-start;
+}

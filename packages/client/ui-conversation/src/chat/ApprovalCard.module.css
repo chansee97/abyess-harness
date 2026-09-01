@@ -1,0 +1,265 @@
+.approval {
+  background: var(--ab-bg-surface);
+  border: 1px solid var(--ab-warn);
+  border-radius: var(--ab-radius-lg);
+  padding: var(--ab-space-3);
+  /* Fills its slot: rendered in the composer takeover seat, which already
+     constrains to the composer card's 720px width. */
+  width: 100%;
+}
+
+.title {
+  color: var(--ab-warn);
+  font-size: var(--ab-text-sm);
+  font-weight: var(--ab-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--ab-space-2);
+}
+
+/* Question card header row: title + pager on the left, header chip right. */
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ab-space-2);
+}
+
+.header .title {
+  margin-bottom: 0;
+}
+
+.pager {
+  margin-left: var(--ab-space-2);
+  color: var(--ab-text-muted);
+  letter-spacing: 0;
+}
+
+.chip {
+  color: var(--ab-text-secondary);
+  font-size: var(--ab-text-sm);
+  border: 1px solid var(--ab-border-subtle);
+  border-radius: 999px;
+  padding: 1px var(--ab-space-2);
+  white-space: nowrap;
+}
+
+.args {
+  font-family: var(--ab-font-mono);
+  font-size: var(--ab-text-sm);
+  color: var(--ab-text-secondary);
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+}
+
+/* ---- Question form (mirrors dsh's QuestionComposer) ---- */
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ab-space-1);
+  margin-top: var(--ab-space-2);
+}
+
+/* One choice: numbered (single-select) or checkbox (multi-select). */
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ab-space-2);
+  min-height: 36px;
+  padding: var(--ab-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--ab-radius-md);
+  background: transparent;
+  color: var(--ab-text-primary);
+  font-family: var(--ab-font);
+  font-size: var(--ab-text-body);
+  text-align: left;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  background: var(--ab-bg-hover);
+}
+
+.option:focus-visible {
+  outline: 1px solid var(--ab-accent);
+  outline-offset: 1px;
+}
+
+.option:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.optionSelected {
+  background: var(--ab-bg-hover);
+  border-color: var(--ab-accent);
+}
+
+/* 20px seat holding the radio's index number. */
+.number {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border-radius: 6px;
+  background: var(--ab-bg-hover);
+  color: var(--ab-text-secondary);
+  font-size: 11px;
+  font-weight: var(--ab-weight-semibold);
+}
+
+/* 20px seat holding the multi-select box; the 14px square and the check
+   icon stack in the same grid cell. */
+.checkbox {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+}
+
+.checkbox::before {
+  content: '';
+  grid-area: 1 / 1;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--ab-border-strong);
+  border-radius: 4px;
+}
+
+.checkboxChecked::before {
+  background: var(--ab-accent);
+  border-color: var(--ab-accent);
+}
+
+.checkbox svg {
+  grid-area: 1 / 1;
+  color: #fff;
+}
+
+.optionCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* Label + recommended badge share one line; description wraps below. */
+.optionLine {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+}
+
+.optionLabel {
+  color: var(--ab-text-primary);
+  word-break: break-word;
+}
+
+.badge {
+  flex: none;
+  color: var(--ab-accent);
+  font-size: var(--ab-text-sm);
+  border: 1px solid var(--ab-accent);
+  border-radius: 999px;
+  padding: 0 6px;
+}
+
+.description {
+  color: var(--ab-text-muted);
+  font-size: var(--ab-text-sm);
+  word-break: break-word;
+}
+
+/* Inline "other" answer row after the options. */
+.customRow {
+  display: flex;
+  align-items: center;
+  gap: var(--ab-space-2);
+  padding: var(--ab-space-2);
+  border: 1px solid var(--ab-border-subtle);
+  border-radius: var(--ab-radius-md);
+  margin-top: var(--ab-space-1);
+}
+
+.customRow:focus-within {
+  border-color: var(--ab-accent);
+}
+
+.customRowActive {
+  border-color: var(--ab-accent);
+}
+
+/* Recolor the seat contents to sit on a centered row instead of first-line. */
+.customRow .number,
+.customRow .checkbox {
+  margin-top: 0;
+}
+
+.customInput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--ab-text-primary);
+  font-family: var(--ab-font);
+  font-size: var(--ab-text-body);
+  line-height: 20px;
+  outline: none;
+}
+
+.customInput::placeholder {
+  color: var(--ab-text-muted);
+}
+
+.error {
+  color: var(--ab-danger);
+  font-size: var(--ab-text-sm);
+  margin-top: var(--ab-space-2);
+}
+
+/* Free-text answer input for question-kind requests. */
+.answer {
+  width: 100%;
+  margin-top: var(--ab-space-2);
+  border: 1px solid var(--ab-border-subtle);
+  border-radius: var(--ab-radius-md);
+  background: transparent;
+  color: var(--ab-text-primary);
+  font-family: var(--ab-font);
+  font-size: var(--ab-text-body);
+  line-height: 20px;
+  padding: var(--ab-space-2);
+  resize: vertical;
+  outline: none;
+}
+
+.answer:focus {
+  border-color: var(--ab-accent);
+}
+
+.answer::placeholder {
+  color: var(--ab-text-muted);
+}
+
+.actions {
+  display: flex;
+  gap: var(--ab-space-2);
+  margin-top: var(--ab-space-3);
+}
+
+/* Destructive action: the outline capsule with only its hover tinted danger,
+ * mirroring harness's approval .reject. */
+.deny:hover:not(:disabled) {
+  background: var(--ab-danger-soft);
+  color: var(--ab-danger);
+  border-color: transparent;
+}

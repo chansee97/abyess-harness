@@ -1,0 +1,13 @@
+{
+  "name": "@abyss-harness/cli",
+  "description": "abyss-harness CLI: boots the plugin tree and opens the Web UI",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "abyss-harness": "./src/main.mjs"
+  },
+  "dependencies": {
+    "@abyss-harness/app-boot": "workspace:^"
+  }
+}

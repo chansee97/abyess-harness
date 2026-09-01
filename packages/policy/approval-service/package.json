@@ -1,0 +1,14 @@
+{
+  "name": "@abyss-harness/approval",
+  "description": "Human-in-the-loop approval seam (request/settle)",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^"
+  },
+  "peerDependencies": {
+    "@abyss-harness/tools": "workspace:^"
+  }
+}

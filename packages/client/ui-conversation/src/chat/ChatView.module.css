@@ -1,0 +1,112 @@
+/* Positioned host: the scroller fills it, the back-to-bottom button floats
+   absolutely at its bottom (sibling of the scroller, so it never scrolls or
+   adds scroll space). */
+.chatArea {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Empty (new chat) state: stop eating the flex space so the parent
+   .conversation can center the welcome + composer group mid-screen. */
+.chatAreaEmpty {
+  flex: 0 0 auto;
+}
+
+.chatList {
+  height: 100%;
+  overflow-y: auto;
+  /* The scrollbar eats 10px from the right, which would push the centered
+     column off-center by half its width. Reserve a symmetric gutter on the
+     left too so content centers against the visible area, not the shrunken
+     content box. */
+  scrollbar-gutter: stable both-edges;
+  padding: var(--ab-space-4);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Shared content column, centered on the same horizontal axis as the
+   composer card. It matches the card's STRAIGHT (middle) width — the card's
+   total (min(100%, 720px)) minus its two 22px pill corners — so the
+   transcript's text lines up under the composer's flat middle instead of
+   spilling into the rounded ends. calc keeps them tied across all viewports;
+   676px is the card at its 720px cap minus 2×22px.
+   NOTE: the column's 100% is relative to .chatList's content-box, which the
+   two 10px scrollbar-gutter slots have already shrunk by 20px. So the 44px
+   corner deduction must drop the gutter's 20px, leaving 24px. */
+.column {
+  flex: 1;
+  width: calc(100% - 24px);
+  max-width: 676px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ab-space-2);
+  min-height: 0;
+}
+
+.thinking {
+  display: flex;
+  align-items: center;
+  gap: var(--ab-space-2);
+  color: var(--ab-text-muted);
+  font-size: var(--ab-text-sm);
+  padding: var(--ab-space-2) var(--ab-space-3);
+}
+
+/* A durable turn failure (turn/error event): danger-tinted, not a bubble —
+   it belongs to the turn, not to either speaker. */
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ab-space-2);
+  color: var(--ab-danger);
+  background: var(--ab-danger-soft);
+  border-radius: var(--ab-radius-md);
+  font-size: var(--ab-text-sm);
+  padding: var(--ab-space-2) var(--ab-space-3);
+  word-break: break-word;
+}
+
+/* Turn-outcome notices (stopped / truncated): quiet, muted. */
+.notice {
+  color: var(--ab-text-muted);
+  font-size: var(--ab-text-sm);
+  padding: var(--ab-space-1) var(--ab-space-3);
+}
+
+.thinkingIcon {
+  flex: none;
+  /* In-progress rides accent, not warn — amber is reserved for cautions
+     (approval requests); ok/danger close the status triad. */
+  color: var(--ab-accent);
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Back-to-bottom: absolute at the chat area's bottom-center, shown only
+   while scrolled up (pinned to bottom hides it), fading in/out. Out of
+   flow, so it never affects scrollHeight or the transcript layout. Rides the
+   shared outline Button (icon-only → the atom's disc); this class states only
+   the floating seat and the white-float + faint shadow chrome an overlay
+   needs above content. The outline stroke is kept as the disc's edge. */
+.backToBottom {
+  position: absolute;
+  bottom: var(--ab-space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ab-bg-floating);
+  box-shadow: var(--ab-shadow-float);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.backToBottom[data-visible] {
+  opacity: 1;
+  pointer-events: auto;
+}

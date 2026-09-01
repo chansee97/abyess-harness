@@ -1,0 +1,8 @@
+{
+  "name": "@abyss-harness/schemastery",
+  "description": "Vendored schemastery 3.18.0 (source copy)",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts"
+}

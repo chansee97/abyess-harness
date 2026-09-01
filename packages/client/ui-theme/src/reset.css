@@ -1,0 +1,74 @@
+/**
+ * Base reset, mirroring harness's ui-theme base.css: normalizes browser
+ * defaults so layout is predictable. Loaded with the tokens before any
+ * component styles.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--ab-bg-base);
+  color: var(--ab-text-primary);
+  font-family: var(--ab-font);
+  font-size: var(--ab-text-md);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, ul, ol, dl, figure, blockquote,
+pre {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--ab-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Keyboard focus is always visible; pointer focus stays clean. */
+:focus-visible {
+  outline: 2px solid var(--ab-focus-ring);
+  outline-offset: 2px;
+}
+
+#root {
+  height: 100%;
+}

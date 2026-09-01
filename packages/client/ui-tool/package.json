@@ -1,0 +1,16 @@
+{
+  "name": "@abyss-harness/client-ui-tool",
+  "description": "Tool-call presentation: one shared row shell with per-tool views (read/write/bash + generic fallback) — the miniature of dsh-client-ui-tool",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/client-ui-primitives": "workspace:^",
+    "clsx": "^2.1.1",
+    "react": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18"
+  }
+}

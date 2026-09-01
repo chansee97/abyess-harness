@@ -1,0 +1,18 @@
+{
+  "name": "@abyss-harness/client-ui-primitives",
+  "description": "Shared UI components (Button, ConnectionBanner, StateDot, DisclosureRow) — the miniature of dsh-client-ui-primitives",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/client-ui-theme": "workspace:^",
+    "clsx": "^2.1.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5"
+  }
+}

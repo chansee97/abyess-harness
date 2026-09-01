@@ -1,0 +1,18 @@
+{
+  "name": "@abyss-harness/web-api",
+  "description": "/api routes and the downlink WebSocket event stream",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^",
+    "ws": "^8.21.3",
+    "@abyss-harness/approval": "workspace:^",
+    "@abyss-harness/sandbox-policy": "workspace:^"
+  },
+  "peerDependencies": {
+    "@abyss-harness/session": "workspace:^",
+    "@abyss-harness/token-meter": "workspace:^"
+  }
+}

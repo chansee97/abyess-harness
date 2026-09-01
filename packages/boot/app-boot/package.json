@@ -1,0 +1,13 @@
+{
+  "name": "@abyss-harness/app-boot",
+  "description": "Shared boot glue for the app bin: .env loading, env validation, the Loader boot sequence, and the browser handoff",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^",
+    "@abyss-harness/cordis-plugin-loader": "workspace:^",
+    "@abyss-harness/cordis-plugin-include": "workspace:^"
+  }
+}

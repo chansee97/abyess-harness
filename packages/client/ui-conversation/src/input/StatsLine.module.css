@@ -1,0 +1,16 @@
+/* The stats strip below the composer: one muted mono line sharing the
+   composer card's width (720px) so the dock reads as one column. */
+.root {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto var(--ab-space-2);
+  padding: 0 var(--ab-space-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ab-text-muted);
+  font-size: var(--ab-text-sm);
+  font-family: var(--ab-font-mono);
+  user-select: none;
+  text-align: center;
+}

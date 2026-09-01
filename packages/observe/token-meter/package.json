@@ -1,0 +1,15 @@
+{
+  "name": "@abyss-harness/token-meter",
+  "description": "approximate per-session token metering on the llm/stream seam",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^"
+  },
+  "peerDependencies": {
+    "@abyss-harness/llm": "workspace:^",
+    "@abyss-harness/session": "workspace:^"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@abyss-harness/cordis-plugin-hmr",
+  "description": "Hot Module Replacement Plugin — vendored @cordisjs/plugin-hmr 1.0.15 source (i18n removed)",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@babel/code-frame": "^7.29.0",
+    "chokidar": "^4.0.3",
+    "@abyss-harness/cosmokit": "workspace:^",
+    "picomatch": "^4.0.3",
+    "@abyss-harness/schemastery": "workspace:^"
+  },
+  "peerDependencies": {
+    "@abyss-harness/cordis": "workspace:^",
+    "@abyss-harness/cordis-plugin-timer": "workspace:^"
+  }
+}

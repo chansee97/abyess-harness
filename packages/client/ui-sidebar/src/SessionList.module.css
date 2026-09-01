@@ -1,0 +1,141 @@
+/* Scrollable conversation history region; fills the sidebar middle. */
+.list {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.empty {
+  color: var(--ab-text-muted);
+  font-size: var(--ab-text-sm);
+  padding: var(--ab-space-1) var(--ab-space-2);
+}
+
+/* Active row wraps the row in an accent-tinted plate. */
+.active {
+  background: var(--ab-accent-soft);
+  border-radius: var(--ab-radius-md);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: var(--ab-radius-md);
+}
+
+.row:hover {
+  background: var(--ab-bg-hover);
+}
+
+/* Row selector rides the shared ghost Button (sm) — only the row-layout
+ * deltas live here: stretch across the row, title aligned left. */
+.rowMain {
+  flex: 1 1 0;
+  min-width: 0;
+  justify-content: flex-start;
+  padding: var(--ab-space-1) var(--ab-space-2);
+  border-radius: var(--ab-radius-sm);
+  font-size: var(--ab-text-md);
+}
+
+.rowTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Time and the actions trigger share one seat at the row's end: both stack
+ * in the same grid cell, and hover swaps the time out for the trigger.
+ * data-open keeps the trigger visible while its menu is up. */
+.rowEnd {
+  flex: none;
+  display: grid;
+  align-items: center;
+  padding-inline-end: var(--ab-space-2);
+}
+
+.rowEnd > * {
+  grid-area: 1 / 1;
+}
+
+.rowTime {
+  color: var(--ab-text-muted);
+  font-size: var(--ab-text-sm);
+}
+
+.row:hover .rowTime,
+.rowEnd[data-open] .rowTime,
+.rowEnd:has(.rowMenu:focus-visible) .rowTime {
+  visibility: hidden;
+}
+
+.rowMenu {
+  color: var(--ab-text-muted);
+  opacity: 0;
+}
+
+.row:hover .rowMenu,
+.rowMenu:focus-visible,
+.rowEnd[data-open] .rowMenu {
+  opacity: 1;
+}
+
+.rowMenu:hover {
+  color: var(--ab-text-primary);
+}
+
+.rowMenuIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.renameBody,
+.deleteBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ab-space-3);
+}
+
+.renameInput {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--ab-border);
+  border-radius: var(--ab-radius-md);
+  background: var(--ab-bg-base);
+  color: var(--ab-text-primary);
+  font-family: var(--ab-font);
+  font-size: var(--ab-text-md);
+  padding: var(--ab-space-2) var(--ab-space-3);
+}
+
+.renameInput:focus {
+  outline: none;
+  border-color: var(--ab-accent);
+}
+
+.renameActions,
+.deleteActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ab-space-2);
+}
+
+/* Destructive action: the outline capsule with only its hover tinted danger,
+ * mirroring harness's approval .reject. */
+.dangerAction:hover:not(:disabled) {
+  background: var(--ab-danger-soft);
+  color: var(--ab-danger);
+  border-color: transparent;
+}
+
+.deleteText {
+  margin: 0;
+  color: var(--ab-text-secondary);
+  font-size: var(--ab-text-md);
+  line-height: var(--ab-leading-normal);
+}

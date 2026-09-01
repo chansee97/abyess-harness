@@ -1,0 +1,103 @@
+/* Tool-call row, shaped like the Think block: no card chrome, no status head.
+   The disclosure row carries everything; the root only sets the quiet
+   secondary tone and the rhythm gap to the next item. */
+.root {
+  margin-bottom: var(--ab-space-2);
+  color: var(--ab-text-secondary);
+}
+
+/* A denied call tints the title danger. */
+.titleDenied {
+  color: var(--ab-danger);
+}
+
+.leadingIcon {
+  color: var(--ab-text-secondary);
+}
+
+/* Single-line args preview shown while the row is collapsed. */
+.preview {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ab-text-muted);
+  font-family: var(--ab-font-mono);
+  font-size: var(--ab-text-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pre {
+  background: var(--ab-bg-elevated);
+  border: 1px solid var(--ab-border);
+  border-radius: var(--ab-radius-md);
+  padding: var(--ab-space-2) var(--ab-space-3);
+  font-family: var(--ab-font-mono);
+  font-size: var(--ab-text-sm);
+  color: var(--ab-text-secondary);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.preDenied { color: var(--ab-danger); }
+
+/* Toolview bodies (read/write/bash rows) share the shell's column rhythm. */
+.viewBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ab-space-2);
+}
+
+.caption {
+  font-family: var(--ab-font-mono);
+  font-size: var(--ab-text-sm);
+  color: var(--ab-text-secondary);
+  word-break: break-all;
+}
+
+.note {
+  color: var(--ab-text-muted);
+}
+
+.command {
+  background: var(--ab-bg-elevated);
+  border: 1px solid var(--ab-border);
+  border-radius: var(--ab-radius-md);
+  padding: var(--ab-space-2) var(--ab-space-3);
+  font-family: var(--ab-font-mono);
+  font-size: var(--ab-text-sm);
+  color: var(--ab-text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Running sweep across the summary while the tool executes — the same
+   affordance the Think block streams with. */
+.sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  background: linear-gradient(90deg, transparent, var(--ab-accent-soft), transparent);
+  animation: tool-sweep 2.6s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes tool-sweep {
+  from { left: -320px; }
+  to { left: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sweep::after {
+    display: none;
+  }
+}

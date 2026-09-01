@@ -1,0 +1,135 @@
+# The dsh-base-style bundle: the shared core of the abyss-harness application.
+# Applied as ONE insert over the empty profile root; later layers address
+# these rows by id. Row order carries no load semantics — activation is
+# service-availability driven.
+
+- insert:
+    # --- Cordis support plugins ---
+    - id: logger-console
+      name: '@abyss-harness/cordis-plugin-logger-console'
+
+    - id: timer
+      name: '@abyss-harness/cordis-plugin-timer'
+
+    - id: hmr
+      disabled: true
+      name: '@abyss-harness/cordis-plugin-hmr'
+      # Disabled by default, like harness's web profile: chokidar's recursive
+      # fs.watch floods the event loop on this Windows host, ballooning
+      # request latency. With it off, packages/* and cordis.yml edits need a
+      # restart; the frontend dev loop reloads via the rebuild signal.
+
+    # --- Core services ---
+    - id: llm
+      name: '@abyss-harness/llm'
+
+    # OpenAI-compatible adapter (DeepSeek/Moonshot/Ollama/vLLM/...).
+    # OPENAI_BASE_URL / MODEL_NAME / OPENAI_API_KEY are required — declare
+    # them in .env (see .env.example).
+    - id: llm-openai
+      name: '@abyss-harness/llm-openai'
+      config:
+        route: demo
+        baseUrl: !!js process.env.OPENAI_BASE_URL
+        model: !!js process.env.MODEL_NAME
+        apiKeyEnv: OPENAI_API_KEY
+
+    # Retry failed model calls (before any output streamed) with linear backoff.
+    - id: llm-retry
+      name: '@abyss-harness/llm-retry'
+      config:
+        retries: 2
+        backoffMs: 800
+
+    # Budget-driven context compaction on the llm/stream seam.
+    - id: compaction
+      name: '@abyss-harness/compaction'
+      config:
+        maxChars: 96000
+        keepToolResults: 4
+
+    - id: session
+      name: '@abyss-harness/session'
+
+    - id: system-prompt
+      name: '@abyss-harness/system-prompt'
+
+    - id: tools
+      name: '@abyss-harness/tools'
+
+    # Built-in tools: unmount one line to take the capability from the model.
+    - id: tool-read-file
+      name: '@abyss-harness/tool-read-file'
+
+    - id: tool-write-file
+      name: '@abyss-harness/tool-write-file'
+
+    - id: tool-str-replace-editor
+      name: '@abyss-harness/tool-str-replace-editor'
+
+    - id: tool-fs-search
+      name: '@abyss-harness/tool-fs-search'
+
+    - id: tool-bash
+      name: '@abyss-harness/tool-bash'
+
+    - id: tool-ask-user
+      name: '@abyss-harness/tool-ask-user'
+
+    # --- Policy & observation ---
+    # File-effect sandbox policy for process tools (see cordis.yml for the
+    # fail-closed caveat: no enforcement backend ships in this demo).
+    - id: sandbox-policy
+      name: '@abyss-harness/sandbox-policy'
+      config:
+        mode: danger-full-access
+
+    # Browser-driven approval: write/edit/bash pop an Allow/Deny card in the UI.
+    - id: approval-policy
+      name: '@abyss-harness/approval-policy'
+      config:
+        requireApproval: ['write', 'edit', 'bash']
+
+    # Cap every durable tool result (head+tail window).
+    - id: tool-result-limiter
+      name: '@abyss-harness/tool-result-limiter'
+      config:
+        maxChars: 6000
+
+    - id: tool-observer
+      name: '@abyss-harness/tool-observer'
+
+    # Approximate per-session token metering, broadcast to the browser.
+    - id: token-meter
+      name: '@abyss-harness/token-meter'
+
+    # --- Persistence ---
+    # Every durable event appends to .sessions/session.jsonl; the previous log
+    # is replayed at boot, so restarting continues the conversation.
+    - id: session-persistence-jsonl
+      name: '@abyss-harness/session-persistence-jsonl'
+      config:
+        dir: '.sessions'
+
+    # --- Web surface ---
+    - id: webserver
+      name: '@abyss-harness/webserver'
+      config:
+        host: 127.0.0.1
+        port: !!js Number(process.env.DEMO_PORT) || 3080
+
+    - id: web-api
+      name: '@abyss-harness/web-api'
+
+    - id: web-frontend
+      name: '@abyss-harness/frontend-static'
+      config:
+        distIndex: web-dist/index.html
+
+    # --- Driver ---
+    - id: agent-loop
+      name: '@abyss-harness/agent-loop'
+      config:
+        route: demo
+        maxSteps: 8
+        persona: You are abyss-harness, a miniature agent harness built on the Cordis plugin framework. Be brief and factual.

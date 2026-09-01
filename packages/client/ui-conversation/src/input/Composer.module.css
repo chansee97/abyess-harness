@@ -1,0 +1,84 @@
+/* Floating capsule composer, mirroring harness's InputBar. */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 var(--ab-space-4) var(--ab-space-1);
+  gap: var(--ab-space-2);
+}
+
+/* Capsule card (harness Input_Bottom): 22px pill, one notch weaker border
+   than buttons, no fill (the page background shows through), barely-there
+   shadow — --ab-shadow-card reads too heavy under this large low-contrast
+   pill, so it carries a local softer one instead.
+   The textarea owns its horizontal padding; the card only sets the 10px top
+   seat above it. */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ab-space-3);
+  width: 100%;
+  max-width: 720px;
+  padding-top: 10px;
+  border: 1px solid var(--ab-border-subtle);
+  border-radius: 22px;
+  /* Component-local presentation value (specific layer): softer than the
+     shared card shadow, tuned to this large low-contrast pill. */
+  --composer-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--composer-card-shadow);
+}
+
+/* Draft: chat body type with harness .InputText's fixed 24px pairing, top +
+   side padding owned here so the wrap width stays inside the 22px stroke. */
+.input {
+  border: none;
+  outline: none;
+  background: transparent;
+  resize: none;
+  color: var(--ab-text-primary);
+  font-family: var(--ab-font);
+  font-size: var(--ab-text-body);
+  line-height: 24px;
+  min-height: 24px;
+  max-height: 168px;
+  overflow-y: auto;
+  padding: 4px var(--ab-space-4) 0;
+}
+
+.input::placeholder {
+  color: var(--ab-text-muted);
+}
+
+.input:disabled {
+  opacity: 0.6;
+}
+
+/* Toolbar row: the send circle sits compact against the card bottom. */
+.actionRow {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2px var(--ab-space-2) var(--ab-space-2);
+}
+
+/* Send: the primary Button in its icon-only form — the atom shapes the disc
+   and owns fill, glyph, hover and disabled; this class only keeps it from
+   shrinking in the flex row. */
+.send {
+  flex: none;
+}
+
+/* Stop: outline disc in place of send while a turn runs. */
+.stop {
+  flex: none;
+  color: var(--ab-danger);
+}
+
+/* Bottom-left slot: the policy chip is pinned to the row's far left via the
+   auto margin (the row is flex-end for the send button), so chip and send sit
+   at opposite ends. */
+.policySlot {
+  display: inline-flex;
+  margin-right: auto;
+}

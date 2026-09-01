@@ -1,0 +1,142 @@
+# The composition root: this list IS the application. Every entry is a plugin;
+# load order comes from service dependencies (inject), not from position here.
+# Edit any entry while the process runs and HMR reconciles just that subtree.
+#
+# packages/bundle/base/cordis.patch.yml carries the identical rows as a bundle
+# patch payload (the `- insert:` form) — the distribution unit, in harness's
+# sense. Keep both in sync; the root file is what boots.
+
+# --- Cordis support plugins -------------------------------------------------
+- id: logger-console
+  name: '@abyss-harness/cordis-plugin-logger-console'
+- id: timer
+  name: '@abyss-harness/cordis-plugin-timer'
+- id: hmr
+  disabled: true
+  name: '@abyss-harness/cordis-plugin-hmr'
+  # Disabled by default, like harness's web profile: chokidar's recursive
+  # fs.watch floods the event loop on this Windows host (all fs activity in
+  # the watched trees dispatches events), ballooning request latency to
+  # ~15s+. With it off, editing packages/* or cordis.yml needs a `pnpm dev`
+  # restart; the frontend dev loop reloads the page through the rebuild
+  # signal instead. Set `disabled: false` to re-enable host-plugin HMR at
+  # the cost of that idle CPU.
+
+# --- Core services ----------------------------------------------------------
+- id: llm
+  name: '@abyss-harness/llm'
+
+# OpenAI-compatible adapter (DeepSeek/Moonshot/Ollama/vLLM/...).
+# OPENAI_BASE_URL / MODEL_NAME / OPENAI_API_KEY are required — declare them
+# in .env (see .env.example).
+- id: llm-openai
+  name: '@abyss-harness/llm-openai'
+  config:
+    route: demo
+    baseUrl: !!js process.env.OPENAI_BASE_URL
+    model: !!js process.env.MODEL_NAME
+    apiKeyEnv: OPENAI_API_KEY
+
+# Retry failed model calls (before any output streamed) with linear backoff.
+- id: llm-retry
+  name: '@abyss-harness/llm-retry'
+  config:
+    retries: 2
+    backoffMs: 800
+
+# Budget-driven context compaction on the llm/stream seam: old tool results
+# are stubbed, then oldest messages dropped, once a request exceeds the
+# character budget. The session log itself is never touched.
+- id: compaction
+  name: '@abyss-harness/compaction'
+  config:
+    maxChars: 96000
+    keepToolResults: 4
+
+- id: session
+  name: '@abyss-harness/session'
+- id: system-prompt
+  name: '@abyss-harness/system-prompt'
+- id: tools
+  name: '@abyss-harness/tools'
+
+# Built-in tools: unmount one line to take the capability away from the model.
+- id: tool-read-file
+  name: '@abyss-harness/tool-read-file'
+- id: tool-write-file
+  name: '@abyss-harness/tool-write-file'
+- id: tool-str-replace-editor
+  name: '@abyss-harness/tool-str-replace-editor'
+- id: tool-fs-search
+  name: '@abyss-harness/tool-fs-search'
+- id: tool-bash
+  name: '@abyss-harness/tool-bash'
+- id: tool-ask-user
+  name: '@abyss-harness/tool-ask-user'
+
+# --- Policy & observation (interception demos) ------------------------------
+# File-effect sandbox policy for process tools (ctx.sandboxPolicy), mirrored
+# from harness's packages/sandbox/sandbox-policy. The package default is the
+# fail-safe 'read-only'; this demo ships no enforcement backend (harness's
+# landlock/bwrap/seatbelt/Windows-ACL providers are not ported), so a confined
+# mode fails closed — every bash call errors with SANDBOX_UNAVAILABLE. Run
+# 'danger-full-access' to keep the demo usable, or mount a SandboxProvider
+# backend plugin and switch to a confined mode.
+- id: sandbox-policy
+  name: '@abyss-harness/sandbox-policy'
+  config:
+    mode: danger-full-access
+
+# Browser-driven approval, now policy-aware (mirrors dsh's sandbox/approval
+# split): listed tools are judged by ctx.sandboxPolicy first — compliant calls
+# auto-allow (logged as a durable tool/policy event), policy rejections are
+# denied with a reason, and calls exceeding the policy (e.g. a write outside
+# the workspace under workspace-write) escalate to the browser Allow/Deny card.
+- id: approval-policy
+  name: '@abyss-harness/approval-policy'
+  config:
+    requireApproval: ['write', 'edit', 'bash']
+
+# Cap every durable tool result (head+tail window) so one huge output cannot
+# blow the context window of every later step.
+- id: tool-result-limiter
+  name: '@abyss-harness/tool-result-limiter'
+  config:
+    maxChars: 6000
+
+- id: tool-observer
+  name: '@abyss-harness/tool-observer'
+
+# Approximate per-session token metering, broadcast to the browser.
+- id: token-meter
+  name: '@abyss-harness/token-meter'
+
+# --- Persistence ------------------------------------------------------------
+# Every durable event appends to .sessions/session.jsonl; the previous log is
+# replayed at boot, so restarting continues the conversation. Delete the
+# directory (or set resume: false) to start fresh.
+- id: session-persistence-jsonl
+  name: '@abyss-harness/session-persistence-jsonl'
+  config:
+    dir: '.sessions'
+
+# --- Web surface (miniature of dsh's host/webserver + api + frontend) -------
+- id: webserver
+  name: '@abyss-harness/webserver'
+  config:
+    host: 127.0.0.1
+    port: !!js Number(process.env.DEMO_PORT) || 3080
+- id: web-api
+  name: '@abyss-harness/web-api'
+- id: web-frontend
+  name: '@abyss-harness/frontend-static'
+  config:
+    distIndex: web-dist/index.html
+
+# --- Driver -----------------------------------------------------------------
+- id: agent-loop
+  name: '@abyss-harness/agent-loop'
+  config:
+    route: demo
+    maxSteps: 8
+    persona: You are abyss-harness, a miniature agent harness built on the Cordis plugin framework. Be brief and factual.

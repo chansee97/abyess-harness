@@ -1,0 +1,8 @@
+{
+  "name": "@abyss-harness/cosmokit",
+  "description": "Vendored cosmokit 1.8.1 (source copy)",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts"
+}

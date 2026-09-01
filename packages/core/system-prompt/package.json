@@ -1,0 +1,11 @@
+{
+  "name": "@abyss-harness/system-prompt",
+  "description": "Ordered prompt-section assembly service",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "peerDependencies": {
+    "@abyss-harness/tools": "workspace:^"
+  }
+}

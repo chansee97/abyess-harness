@@ -1,0 +1,12 @@
+{
+  "name": "@abyss-harness/sandbox-policy",
+  "description": "Sandbox policy home: resolves the deployment's file-effect mode and workspace root, and describes the policy in the system prompt",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^",
+    "@abyss-harness/sandbox": "workspace:^"
+  }
+}

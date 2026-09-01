@@ -1,0 +1,17 @@
+{
+  "name": "@abyss-harness/approval-policy",
+  "description": "Browser-driven tool approval policy (pre-execute interception)",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^",
+    "@abyss-harness/approval": "workspace:^",
+    "@abyss-harness/sandbox": "workspace:^",
+    "@abyss-harness/sandbox-policy": "workspace:^"
+  },
+  "peerDependencies": {
+    "@abyss-harness/tools": "workspace:^"
+  }
+}

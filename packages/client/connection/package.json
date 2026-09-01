@@ -1,0 +1,8 @@
+{
+  "name": "@abyss-harness/client-connection",
+  "description": "Browser wire client: the /api HTTP calls plus the downlink WebSocket event stream — the miniature of dsh-client-connection",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts"
+}

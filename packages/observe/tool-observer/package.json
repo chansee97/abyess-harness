@@ -1,0 +1,14 @@
+{
+  "name": "@abyss-harness/tool-observer",
+  "description": "Observes every tool outcome through tools/result",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^"
+  },
+  "peerDependencies": {
+    "@abyss-harness/tools": "workspace:^"
+  }
+}

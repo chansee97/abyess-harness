@@ -1,0 +1,11 @@
+{
+  "name": "@abyss-harness/sandbox",
+  "description": "Process-sandbox capability seam: mode vocabulary, per-call policy types, and the fail-closed SandboxProvider contract",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^"
+  }
+}

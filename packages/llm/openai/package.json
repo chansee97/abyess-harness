@@ -1,0 +1,13 @@
+{
+  "name": "@abyss-harness/llm-openai",
+  "description": "OpenAI-compatible streaming adapter plugin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^",
+    "@abyss-harness/llm": "workspace:^",
+    "@abyss-harness/session": "workspace:^"
+  }
+}

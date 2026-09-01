@@ -1,0 +1,23 @@
+{
+  "name": "@abyss-harness-web-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit && vite build",
+    "watch": "vite build --watch --no-emptyOutDir"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "@abyss-harness/client-ui-renderer": "workspace:^",
+    "@abyss-harness/client-ui-theme": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "@vitejs/plugin-react": "^6.1.0",
+    "typescript": "^5.9.2",
+    "vite": "^8.2.2"
+  }
+}

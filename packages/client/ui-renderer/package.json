@@ -1,0 +1,18 @@
+{
+  "name": "@abyss-harness/client-ui-renderer",
+  "description": "Application assembly: the session data hub bound to the layout shell and domain slots — the miniature of dsh-client-ui-renderer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/client-connection": "workspace:^",
+    "@abyss-harness/client-ui-conversation": "workspace:^",
+    "@abyss-harness/client-ui-layout": "workspace:^",
+    "@abyss-harness/client-ui-sidebar": "workspace:^",
+    "react": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18"
+  }
+}

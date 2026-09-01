@@ -1,0 +1,14 @@
+{
+  "name": "@abyss-harness/cordis-plugin-timer",
+  "description": "Timer helpers — vendored @cordisjs/plugin-timer 1.1.2 source",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cosmokit": "workspace:^"
+  },
+  "peerDependencies": {
+    "@abyss-harness/cordis": "workspace:^"
+  }
+}

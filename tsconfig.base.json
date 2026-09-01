@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2024",
+    "lib": ["ES2024"],
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+    // Source-level resolution for the repo-local graph: every @abyss-harness name maps
+    // to its TypeScript source (vendor or packages), mirroring harness's
+    // tsconfig.base paths. No build step — tsx runs these sources directly.
+    "paths": {
+      "@abyss-harness/cordis": ["./vendor/cordis/src/index.ts"],
+      "@abyss-harness/cosmokit": ["./vendor/cosmokit/src/index.ts"],
+      "@abyss-harness/schemastery": ["./vendor/schemastery/src/index.ts"],
+      "@abyss-harness/cordis-plugin-loader": ["./vendor/loader/src/index.ts"],
+      "@abyss-harness/cordis-plugin-include": ["./vendor/include/src/index.ts"],
+      "@abyss-harness/cordis-plugin-group": ["./vendor/group/src/index.ts"],
+      "@abyss-harness/cordis-plugin-timer": ["./vendor/timer/src/index.ts"],
+      "@abyss-harness/cordis-plugin-hmr": ["./vendor/hmr/src/index.ts"],
+      "@abyss-harness/cordis-plugin-logger-console": ["./vendor/logger-console/src/index.ts"],
+      "@abyss-harness/session": ["./packages/core/session/src/index.ts"],
+      "@abyss-harness/session/types": ["./packages/core/session/src/types.ts"]
+    }
+  }
+}

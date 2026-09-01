@@ -1,0 +1,5 @@
+.icon,
+.chevron {
+  display: inline-flex;
+  color: var(--ab-text-muted);
+}

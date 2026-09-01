@@ -1,0 +1,17 @@
+{
+  "name": "@abyss-harness/client-ui-layout",
+  "description": "Two-column application shell (sidebar | conversation) with drag handles and the sidebar solver — the miniature of dsh-client-ui-layout",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/client-connection": "workspace:^",
+    "@abyss-harness/client-ui-primitives": "workspace:^",
+    "clsx": "^2.1.1",
+    "react": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18"
+  }
+}

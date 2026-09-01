@@ -1,0 +1,18 @@
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex: none;
+}
+
+.idle { background: var(--ab-text-muted); }
+.running { background: var(--ab-accent); animation: pulse 1.2s ease-in-out infinite; }
+.ok { background: var(--ab-ok); }
+.denied { background: var(--ab-danger); }
+.error { background: var(--ab-danger); }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}

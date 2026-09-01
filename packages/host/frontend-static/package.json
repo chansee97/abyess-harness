@@ -1,0 +1,14 @@
+{
+  "name": "@abyss-harness/frontend-static",
+  "description": "SPA dist server over the webserver fallback seat",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@abyss-harness/cordis": "workspace:^"
+  },
+  "peerDependencies": {
+    "@abyss-harness/webserver": "workspace:^"
+  }
+}

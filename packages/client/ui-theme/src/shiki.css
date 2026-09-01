@@ -1,0 +1,37 @@
+/**
+ * Syntax-highlighting theme for shiki's css-variables renderer, mirroring
+ * harness's shiki.css. Split from the token sheets because it serves the
+ * highlighter engine alone; components never consume these variables
+ * directly — they style containers and let the shiki output resolve here.
+ *
+ * Colors reference the static palette so both themes stay symmetric.
+ */
+
+:root {
+  --shiki-foreground: var(--ab-static-text-1);
+  --shiki-background: transparent;
+  --shiki-token-constant: #7fb6ff;
+  --shiki-token-string: #9ece6a;
+  --shiki-token-comment: #6a7180;
+  --shiki-token-keyword: #c792ea;
+  --shiki-token-number: #ff9e64;
+  --shiki-token-function: #82aaff;
+  --shiki-token-parameter: var(--ab-static-text-1);
+  --shiki-token-string-expression: #9ece6a;
+  --shiki-token-punctuation: var(--ab-static-text-2);
+  --shiki-token-link: #7fb6ff;
+  --shiki-token-operator: #89ddff;
+}
+
+/* Light re-declares only the hue-bearing tokens; neutrals keep resolving
+   through the flipped static palette. */
+[data-theme='light'] {
+  --shiki-token-constant: #0550ae;
+  --shiki-token-string: #0a7d26;
+  --shiki-token-comment: #6e7781;
+  --shiki-token-keyword: #cf222e;
+  --shiki-token-number: #953800;
+  --shiki-token-function: #8250df;
+  --shiki-token-link: #0550ae;
+  --shiki-token-operator: #0550ae;
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@abyss-harness/cordis-plugin-group",
+  "description": "Vendored @cordisjs/plugin-group 1.0.0 source (re-exports the loader's EntryGroup)",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "peerDependencies": {
+    "@abyss-harness/cordis-plugin-loader": "workspace:^"
+  }
+}

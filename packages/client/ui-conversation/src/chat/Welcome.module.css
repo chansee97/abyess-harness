@@ -1,0 +1,11 @@
+.welcome {
+  margin: auto;
+  text-align: center;
+  padding: var(--ab-space-5);
+}
+
+.welcomeTitle {
+  color: var(--ab-text-primary);
+  font-size: var(--ab-text-xl);
+  font-weight: var(--ab-weight-normal);
+}

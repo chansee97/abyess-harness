@@ -1,0 +1,233 @@
+/* Dropdown menu surface (Menu.tsx): in-place or portal-positioned card with
+   selectable rows, separators, heading labels, submenus, and a pinned footer. */
+
+.root {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Menu card (harness figma MenuDropdown): lighter plate (--ab-bg-overlay, one
+   notch above elevated) over an inverted luminous hairline, so it floats off
+   the page instead of reading as a heavy dark slab; the soft popover shadow
+   (harness shadow-lv3 recipe) does the lifting. 4px inset padding. */
+.list,
+.submenu {
+  box-sizing: border-box;
+  padding: var(--ab-space-1);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--ab-border-inverted);
+  border-radius: var(--ab-radius-lg);
+  background: var(--ab-bg-overlay);
+  box-shadow: var(--ab-shadow-popover);
+}
+
+/* Primary card. */
+.list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: var(--ab-z-popover);
+  min-width: 218px;
+  max-width: 360px;
+}
+
+/* Portal mode: fixed in the viewport, coordinates supplied inline from the
+ * anchor rect. Portaled lists must layer above modal overlays (z 1000). */
+.portal {
+  position: fixed;
+  top: auto;
+  left: auto;
+  z-index: var(--ab-z-toast);
+}
+
+/* Open above the anchor. */
+.sideTop {
+  top: auto;
+  bottom: calc(100% + 4px);
+}
+
+.alignEnd {
+  left: auto;
+  right: 0;
+}
+
+/* Viewport fit: the card stops 12px short of the viewport edges and taller
+ * content scrolls inside .viewport, so a pinned .footer stays visible. The
+ * 12px inset comes from --menu-margin (set by Menu.tsx), the single source. */
+.scrollable {
+  max-height: calc(100vh - var(--menu-margin, 12px) - var(--menu-margin, 12px));
+}
+
+.viewport {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.scrollable .viewport {
+  overflow-y: auto;
+}
+
+/* Pinned rows below the scroll region. */
+.footer {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--ab-space-1);
+  padding-top: var(--ab-space-1);
+  border-top: 1px solid var(--ab-border);
+}
+
+.itemWrap {
+  position: relative;
+}
+
+/* Menu cell: min-h 40, pad 10/8, gap 8 between icon / label / trailing check. */
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--ab-space-2);
+  width: 100%;
+  min-height: 40px;
+  padding: var(--ab-space-2) 10px;
+  border: none;
+  border-radius: var(--ab-radius-md);
+  background: transparent;
+  cursor: pointer;
+  font-size: var(--ab-text-md);
+  line-height: 22px;
+  color: var(--ab-text-primary);
+  text-align: left;
+}
+
+.item:hover:not(:disabled) {
+  /* Alpha overlay, not --ab-bg-hover: a solid palette value can equal the
+     plate underneath (dark bg-3 == overlay surface), killing the feedback.
+     Harness uses the same white/blue-alpha overlay pair. */
+  background: var(--ab-interactive-hover);
+}
+
+.denseList .item {
+  min-height: 34px;
+  padding-block: 5px;
+}
+
+.denseList .label {
+  padding-block: var(--ab-space-1);
+}
+
+.list.compactList,
+.submenu.compactList {
+  min-width: 164px;
+  padding: 2px;
+  border-radius: var(--ab-radius-sm);
+}
+
+.compactList .item {
+  min-height: 26px;
+  gap: 6px;
+  padding: 3px 7px;
+  /* Concentric with the plate: outer radius minus the plate's 2px padding. */
+  border-radius: calc(var(--ab-radius-sm) - 2px);
+  font-size: var(--ab-text-sm);
+  line-height: 18px;
+}
+
+.compactList .itemIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.compactList .separator {
+  margin: 2px;
+}
+
+.compactList .label {
+  padding: var(--ab-space-1) 7px;
+  font-size: var(--ab-text-sm);
+  line-height: 16px;
+}
+
+.item:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.itemIcon {
+  display: inline-flex;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  color: var(--ab-text-muted);
+}
+
+.itemLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.check {
+  flex: none;
+  color: var(--ab-text-primary);
+}
+
+/* Selected cell keeps the plain fill (marker is the trailing check). */
+.selected {
+  background: transparent;
+}
+
+/* Destructive row: error text/icon, danger hover fill. */
+.danger {
+  color: var(--ab-danger);
+}
+
+.danger .itemIcon {
+  color: var(--ab-danger);
+}
+
+.danger:hover:not(:disabled) {
+  background: var(--ab-danger-soft);
+}
+
+/* Heading row: non-interactive small grey text. */
+.label {
+  padding: var(--ab-space-2) 10px;
+  font-size: var(--ab-text-sm);
+  line-height: 16px;
+  color: var(--ab-text-muted);
+}
+
+/* Separator cell. */
+.separator {
+  height: 1px;
+  margin: var(--ab-space-1) 2px;
+  background: var(--ab-border);
+}
+
+/* Nested card to the right of the parent row. Bottom-aligned with the parent
+ * card (grows upward): itemWrap sits in .list's 4px pad, so bottom: -4px
+ * matches the list's outer bottom edge. ::before bridges the pointer gap. */
+.submenu {
+  position: absolute;
+  top: auto;
+  bottom: -4px;
+  left: calc(100% + 10px);
+  z-index: var(--ab-z-popover-deep);
+  min-width: 163px;
+}
+
+.submenu::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -10px;
+  width: 10px;
+}

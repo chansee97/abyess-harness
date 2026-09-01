@@ -1,0 +1,193 @@
+/**
+ * Design tokens, three layers:
+ *   1. static scale (--ab-static-*) — raw palette values; never consumed directly.
+ *   2. semantic aliases (--ab-*) — role-named tokens components consume.
+ *   3. component-specific values stay in their own CSS Modules.
+ *
+ * Dark is first-class; light re-declares the same names below. Values that
+ * cannot derive from the palette flip are re-declared there explicitly.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* ---- static palette ---- */
+  --ab-static-bg-0: #151517;
+  --ab-static-bg-1: #232324;
+  --ab-static-bg-2: #2c2c2e;
+  --ab-static-bg-3: #353638;
+  --ab-static-text-0: #f9fafb;
+  --ab-static-text-1: #cfd3d6;
+  --ab-static-text-2: #adb2b8;
+  --ab-static-border: rgba(255, 255, 255, 0.12);
+  --ab-static-accent: #679efe;
+  --ab-static-accent-soft: rgba(103, 158, 254, 0.16);
+  --ab-static-ok: #22c55e;
+  --ab-static-ok-soft: rgba(34, 197, 94, 0.14);
+  --ab-static-danger: #f25a5a;
+  --ab-static-danger-soft: rgba(242, 90, 90, 0.15);
+  --ab-static-warn: #f59e0b;
+  --ab-static-warn-soft: rgba(245, 158, 11, 0.16);
+  --ab-static-accent-container: #2c2c2e;
+
+  /* ---- surfaces: elevation ladder base → overlay ---- */
+  --ab-bg-base: var(--ab-static-bg-0);
+  --ab-bg-surface: var(--ab-static-bg-1);
+  --ab-bg-elevated: var(--ab-static-bg-2);
+  --ab-bg-hover: var(--ab-static-bg-3);
+  /* Overlay plate and floating disc flip to pure white on light (below). */
+  --ab-bg-overlay: var(--ab-static-bg-3);
+  --ab-bg-floating: var(--ab-static-bg-2);
+  /* Theme-invariant plate; reads identically over any surface. */
+  --ab-bg-invariant: #43454a;
+  /* Text on an invariant plate (tooltip): white across both themes. */
+  --ab-on-invariant: #ffffff;
+  --ab-bg-skeleton: rgba(255, 255, 255, 0.08);
+  /* Backdrop masks, strength ladder l1 (light sheet backdrop) → l3
+     (full-screen modal scrim). */
+  --ab-bg-mask-l1: rgba(0, 0, 0, 0.2);
+  --ab-bg-mask-l2: rgba(0, 0, 0, 0.35);
+  --ab-bg-mask-l3: rgba(0, 0, 0, 0.45);
+
+  /* ---- borders: strength ladder ---- */
+  --ab-border-l1: rgba(255, 255, 255, 0.06);
+  --ab-border: var(--ab-static-border); /* = l2 */
+  --ab-border-strong: rgba(255, 255, 255, 0.18);
+  --ab-border-subtle: rgba(255, 255, 255, 0.06);
+  /* Luminous hairline; fully transparent on light (below). */
+  --ab-border-inverted: rgba(255, 255, 255, 0.06);
+
+  /* ---- labels: contrast ladder primary → caption ---- */
+  --ab-text-primary: var(--ab-static-text-0);
+  --ab-text-secondary: var(--ab-static-text-1);
+  --ab-text-muted: var(--ab-static-text-2);
+  --ab-text-caption: color-mix(in srgb, var(--ab-static-text-2) 72%, transparent);
+  /* Text on top of an accent/colored fill. Theme-invariant — light inherits
+     this and does not redeclare. */
+  --ab-on-accent: #ffffff;
+
+  /* ---- states ---- */
+  --ab-accent: var(--ab-static-accent);
+  --ab-accent-soft: var(--ab-static-accent-soft);
+  --ab-ok: var(--ab-static-ok);
+  --ab-ok-soft: var(--ab-static-ok-soft);
+  --ab-danger: var(--ab-static-danger);
+  --ab-danger-soft: var(--ab-static-danger-soft);
+  --ab-warn: var(--ab-static-warn);
+  --ab-warn-soft: var(--ab-static-warn-soft);
+  --ab-accent-container: var(--ab-static-accent-container);
+
+  /* ---- interactive: alpha tints visible over any surface ---- */
+  --ab-interactive-hover: rgba(255, 255, 255, 0.08);
+  /* Pressed/active step above hover (alpha survives the overlay collision
+     that would flatten solid values). */
+  --ab-interactive-active: rgba(255, 255, 255, 0.14);
+  /* Persistent selection plate: solid neutral fill one notch above hover.
+     On the bg-overlay plate it collides by design — menu rows use check
+     markers instead of fills there. */
+  --ab-interactive-selected: var(--ab-static-bg-3);
+  --ab-interactive-hover-danger: rgba(242, 90, 90, 0.15);
+  --ab-focus-ring: var(--ab-static-accent);
+
+  /* ---- scrollbar tiers; body-level indirection lives in scrollbar.css ---- */
+  --ab-scrollbar-thumb-l1: var(--ab-static-bg-2);
+  --ab-scrollbar-thumb-hover-l1: var(--ab-static-border);
+  --ab-scrollbar-thumb-l2: var(--ab-static-bg-3);
+  --ab-scrollbar-thumb-hover-l2: var(--ab-static-border);
+
+  /* ---- typography / radii / spacing / motion ---- */
+  --ab-font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --ab-font-mono: Consolas, 'SF Mono', monospace;
+
+  --ab-text-sm: 12px;
+  --ab-text-md: 14px;
+  --ab-text-lg: 16px;
+  --ab-text-xl: 20px;
+  /* Long-form reading step above the compact ladder. */
+  --ab-text-body: var(--ab-text-lg);
+  --ab-leading-tight: 1.25;
+  --ab-leading-normal: 1.5;
+  --ab-weight-normal: 400;
+  --ab-weight-medium: 500;
+  --ab-weight-semibold: 600;
+
+  --ab-radius-sm: 6px;
+  --ab-radius-md: 8px;
+  --ab-radius-lg: 10px;
+  --ab-space-1: 4px;
+  --ab-space-2: 8px;
+  --ab-space-3: 12px;
+  --ab-space-4: 16px;
+  --ab-space-5: 24px;
+  --ab-transition-fast: 120ms ease;
+  --ab-transition-slow: 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* ---- elevation shadows (black-alpha reads on both themes) ---- */
+  --ab-shadow-card: 0 2px 16px rgba(0, 0, 0, 0.18);
+  --ab-shadow-float: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --ab-shadow-popover:
+    0 0 1px 0 rgba(0, 0, 0, 0.2),
+    0 0 4px 0 rgba(0, 0, 0, 0.02),
+    0 12px 32px 0 rgba(0, 0, 0, 0.08);
+  --ab-shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.25);
+
+  /* ---- z-index tiers (keep relative order stable) ---- */
+  --ab-z-drag: 2;
+  --ab-z-popover: 100;
+  --ab-z-popover-deep: 101;
+  --ab-z-modal: 1000;
+  --ab-z-toast: 1100;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  --ab-static-bg-0: #ffffff;
+  --ab-static-bg-1: #f7f8fa;
+  --ab-static-bg-2: #f1f3f6;
+  --ab-static-bg-3: #e9ecf1;
+  --ab-static-text-0: #1a1d24;
+  --ab-static-text-1: #3f4553;
+  --ab-static-text-2: #858b98;
+  --ab-static-border: #e2e5ea;
+  --ab-static-accent: #3964fe;
+  --ab-static-accent-soft: rgba(57, 100, 254, 0.12);
+  --ab-static-ok: #1f9d57;
+  --ab-static-ok-soft: rgba(31, 157, 87, 0.12);
+  --ab-static-danger: #d64545;
+  --ab-static-danger-soft: rgba(214, 69, 69, 0.1);
+  --ab-static-warn: #c67f1f;
+  --ab-static-warn-soft: rgba(198, 127, 31, 0.12);
+  --ab-static-accent-container: #edf3fe;
+
+  --ab-border-l1: rgba(0, 0, 0, 0.06);
+  --ab-border-subtle: rgba(0, 0, 0, 0.1);
+  --ab-border-strong: rgba(0, 0, 0, 0.24);
+  --ab-border-inverted: rgba(0, 0, 0, 0);
+
+  --ab-bg-overlay: var(--ab-static-bg-0);
+  --ab-bg-floating: var(--ab-static-bg-0);
+  --ab-bg-skeleton: rgba(0, 0, 0, 0.05);
+
+  --ab-bg-mask-l1: rgba(0, 0, 0, 0.12);
+  --ab-bg-mask-l2: rgba(0, 0, 0, 0.24);
+  /* l3 keeps the dark value (black scrims read the same on both themes). */
+
+  --ab-interactive-hover: rgba(38, 49, 72, 0.06);
+  --ab-interactive-active: rgba(38, 49, 72, 0.12);
+  --ab-interactive-hover-danger: rgba(214, 69, 69, 0.1);
+
+  --ab-scrollbar-thumb-l2: var(--ab-static-border);
+  --ab-scrollbar-thumb-hover-l2: var(--ab-static-text-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,89 @@
+/* Full-viewport modal layer: mask + centered card. Portaled to body by
+   Modal.tsx so ancestor stacking contexts cannot trap it. */
+
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ab-z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ab-space-5);
+}
+
+.mask {
+  position: absolute;
+  inset: 0;
+  background: var(--ab-bg-mask-l3);
+  backdrop-filter: blur(2px);
+}
+
+.dialog {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: min(380px, 100%);
+  padding: 0 0 var(--ab-space-5);
+  overflow: hidden;
+  border: 1px solid var(--ab-border);
+  border-radius: var(--ab-radius-lg);
+  background: var(--ab-bg-surface);
+  box-shadow: var(--ab-shadow-modal);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Header row: title left, close button right. */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ab-space-2);
+  padding: 22px 14px var(--ab-space-3) var(--ab-space-5);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--ab-text-xl);
+  line-height: 24px;
+  font-weight: var(--ab-weight-semibold);
+  color: var(--ab-text-primary);
+}
+
+/* Close: the ghost Button's icon-only disc owns box and hover; only its
+ * seat in the header row and secondary tint live here. */
+.close {
+  flex: none;
+  color: var(--ab-text-secondary);
+}
+
+.description {
+  margin: 0;
+  padding: 0 var(--ab-space-5);
+  font-size: var(--ab-text-md);
+  line-height: 22px;
+  font-weight: var(--ab-weight-normal);
+  color: var(--ab-text-primary);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-top: 20px;
+  padding: 0 var(--ab-space-5);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ab-space-2);
+  padding: 0 var(--ab-space-5);
+}

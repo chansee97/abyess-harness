@@ -1,0 +1,65 @@
+/* One flat surface for the whole block — no frame, no separate header fill;
+ * .block carries the only background and everything above sits on it. */
+.block {
+  margin: 0.6em 0;
+  border-radius: var(--ab-radius-md);
+  overflow: hidden;
+  background: var(--ab-bg-elevated);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ab-space-2);
+  padding: var(--ab-space-1) var(--ab-space-3);
+  font-family: var(--ab-font-mono);
+  font-size: var(--ab-text-sm);
+  color: var(--ab-text-muted);
+}
+
+.lang {
+  text-transform: lowercase;
+}
+
+/* Copy rides the shared ghost Button's icon-only form — only the compact
+ * code-header seat and its secondary tint live here (3px padding over the
+ * 16px glyph = 22px disc so the header line keeps its height). Margin-left
+ * keeps it pinned right even when no language label is rendered. */
+.copy {
+  margin-left: auto;
+  padding: 3px;
+  border-radius: var(--ab-radius-sm);
+  color: var(--ab-text-secondary);
+}
+
+.copy:hover {
+  color: var(--ab-text-primary);
+}
+
+.plain {
+  margin: 0;
+  padding: var(--ab-space-3);
+  overflow-x: auto;
+  font-family: var(--ab-font-mono);
+  font-size: var(--ab-text-sm);
+}
+
+.plain code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--ab-font-mono);
+}
+
+.highlighted {
+  overflow-x: auto;
+}
+
+.highlighted :global(pre.shiki) {
+  margin: 0;
+  padding: var(--ab-space-3);
+  font-family: var(--ab-font-mono);
+  font-size: var(--ab-text-sm);
+  background: transparent;
+}

@@ -1,0 +1,41 @@
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--ab-space-2);
+  margin-top: var(--ab-space-2);
+  min-height: 18px;
+}
+
+/* Assistant rows stretch their children; the actions cluster stays compact
+   (shrink-to-fit, left-aligned under the full-width markdown). */
+.assistantMeta {
+  align-self: flex-start;
+}
+
+/* The clock is hover-revealed; devices without hover keep it visible. */
+@media (hover: hover) {
+  .time {
+    opacity: 0;
+    transition: opacity var(--ab-transition-fast);
+  }
+
+  .meta:hover .time,
+  .meta:focus-within .time {
+    opacity: 1;
+  }
+}
+
+.time {
+  color: var(--ab-text-muted);
+  font-size: var(--ab-text-sm);
+}
+
+/* Copy: the ghost Button's icon-only disc provides the box and hover disc;
+ * this class only mutes the resting tint. */
+.action {
+  color: var(--ab-text-muted);
+}
+
+.action:hover {
+  color: var(--ab-text-primary);
+}

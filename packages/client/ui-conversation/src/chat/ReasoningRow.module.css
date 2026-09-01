@@ -1,0 +1,66 @@
+.root {
+  margin-bottom: var(--ab-space-2);
+  color: var(--ab-text-secondary);
+}
+
+.leadingIcon {
+  color: var(--ab-text-secondary);
+}
+
+.separator {
+  flex: none;
+  width: 2px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--ab-text-muted);
+}
+
+/* One-line preview, present only while collapsed. */
+.content {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ab-text-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.followEnd {
+  text-overflow: clip;
+}
+
+.body {
+  padding: var(--ab-space-1) 0 var(--ab-space-1) 22px;
+  color: var(--ab-text-secondary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Running sweep across the summary while the reasoning tail streams. */
+.sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  background: linear-gradient(90deg, transparent, var(--ab-accent-soft), transparent);
+  animation: reasoning-sweep 2.6s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes reasoning-sweep {
+  from { left: -320px; }
+  to { left: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sweep::after {
+    display: none;
+  }
+}
